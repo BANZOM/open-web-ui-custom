@@ -17,6 +17,3 @@ else
     echo "Error: /app/backend/start.sh not found in base image."
     exit 1
 fi
-
-# Keep the container running
-tail -f /dev/null
