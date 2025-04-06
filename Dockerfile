@@ -27,8 +27,6 @@ RUN echo "Installing Cloudflared..." && \
     dpkg -i cloudflared.deb && \
     rm cloudflared.deb
 
-ENV PATH="/root/.cargo/bin:${PATH}"
-
 RUN echo "Installing Open WebUI..." && \
     pip install open-webui
 
