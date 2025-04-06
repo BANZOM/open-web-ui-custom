@@ -7,11 +7,11 @@ export OLLAMA_MODELS=${OLLAMA_MODELS:-/data/ollama}
 mkdir -p "$DATA_DIR" "$OLLAMA_MODELS"
 
 echo "Starting Ollama..."
-ollama serve &
+ollama serve >> ollama.logs &
 sleep 5
 
 echo "Starting Open WebUI..."
-open-webui serve --host 0.0.0.0 --port 8080 &
+open-webui serve --host 0.0.0.0 --port 8080 >> webui.logs &
 
 echo "Starting Cloudflared..."
 # Use the tunnel token from the Cloudflare dashboard

@@ -33,6 +33,4 @@ RUN echo "Installing Open WebUI..." && \
 COPY entrypoint.sh /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh
 
-RUN mkdir -p "$WEBUI_DATA_DIR" "$OLLAMA_MODELS"
-
 ENTRYPOINT ["/app/entrypoint.sh"]
