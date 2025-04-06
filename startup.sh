@@ -15,4 +15,17 @@ docker run -d -p 3000:8080 --gpus=all -v ollama:/root/.ollama -v open-webui:/app
 docker run -itd --gpus all \
   --name banzo-webui-debug-container \
   --restart always \
-  banzo-openwebui-debug:3.0 
+  -e CLOUDFLARED_TUNNEL_TOKEN=${TUNNEL_TOKEN} \
+  banzo-openwebui-debug:3
+
+
+docker build -t banzo-openwebui-debug:3 .
+docker build -t banzo/openwebui-custom:latest .
+
+docker run -itd --gpus all \
+  --name banzo-webui-container \
+  --restart always \
+  -v /path/to/your/ollama_data:/root/.ollama \
+  -v /path/to/your/openwebui_data:/app/backend/data \
+  -e CLOUDFLARED_TUNNEL_TOKEN=${TUNNEL_TOKEN} \
+  banzo/openwebui-custom
