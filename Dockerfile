@@ -11,4 +11,6 @@ RUN echo "Installing Cloudflared..." && \
 
 COPY entrypoint.sh .
 
+ENV CLOUDFLARED_TUNNEL_TOKEN=""
+
 ENTRYPOINT ["bash", "entrypoint.sh"]
