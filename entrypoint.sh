@@ -8,15 +8,8 @@ if [ -z "$CLOUDFLARED_TUNNEL_TOKEN" ]; then
 fi
 
 echo "Starting Cloudflared tunnel..."
-cloudflared tunnel --no-autoupdate run --token "$CLOUDFLARED_TUNNEL_TOKEN" &
-CLOUDFLARED_PID=$!
-# Wait for Cloudflared to start
-sleep 5
-if ! ps -p $CLOUDFLARED_PID > /dev/null; then
-    echo "Error: Cloudflared tunnel failed to start."
-    exit 1
-fi
-echo "Cloudflared tunnel started with PID $CLOUDFLARED_PID."
+cloudflared tunnel --no-autoupdate run --token "$CLOUDFLARED_TUNNEL_TOKEN" >> /app/backend/cloudflared.logs 2&>1 &
+echo "Cloudflared tunnel started."
 
 if [ -f "/app/backend/start.sh" ]; then
     /bin/bash /app/backend/start.sh
