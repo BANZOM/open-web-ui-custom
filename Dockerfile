@@ -30,7 +30,7 @@ RUN echo "Installing Cloudflared..." && \
 ENV PATH="/root/.cargo/bin:${PATH}"
 
 RUN echo "Installing Open WebUI..." && \
-    pip install open-webui --no-cache-dir
+    pip install open-webui
 
 COPY entrypoint.sh /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh
