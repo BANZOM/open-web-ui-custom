@@ -7,7 +7,7 @@ WORKDIR /app
 
 ENV OLLAMA_HOST=0.0.0.0 \
     PYTHONUNBUFFERED=1 \
-    WEBUI_DATA_DIR=/data/open-webui \
+    DATA_DIR=/data/open-webui \
     OLLAMA_MODELS=/data/ollama
 
 EXPOSE 8080 11434
@@ -21,9 +21,6 @@ RUN apt-get update && \
 RUN echo "Installing Ollama..." && \
     curl -fsSL https://ollama.com/install.sh | sh
 
-RUN echo "Installing uv..." && \
-    curl -LsSf https://astral.sh/uv/install.sh | sh
-
 RUN echo "Installing Cloudflared..." && \
     CLOUDFLARED_VERSION=$(curl -s https://api.github.com/repos/cloudflare/cloudflared/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")') && \
     curl -L --output cloudflared.deb "https://github.com/cloudflare/cloudflared/releases/download/${CLOUDFLARED_VERSION}/cloudflared-linux-amd64.deb" && \
@@ -33,7 +30,7 @@ RUN echo "Installing Cloudflared..." && \
 ENV PATH="/root/.cargo/bin:${PATH}"
 
 RUN echo "Installing Open WebUI..." && \
-    uv pip install --system open-webui --no-cache
+    pip install open-webui --no-cache-dir
 
 COPY entrypoint.sh /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh

@@ -2,9 +2,9 @@
 set -e
 
 # Default DATA_DIR if not set externally
-export WEBUI_DATA_DIR=${WEBUI_DATA_DIR:-/data/open-webui}
+export DATA_DIR=${WEBUI_DATA_DIR:-/data/open-webui}
 export OLLAMA_MODELS=${OLLAMA_MODELS:-/data/ollama}
-mkdir -p "$WEBUI_DATA_DIR" "$OLLAMA_MODELS"
+mkdir -p "$DATA_DIR" "$OLLAMA_MODELS"
 
 echo "Starting Ollama..."
 ollama serve &
