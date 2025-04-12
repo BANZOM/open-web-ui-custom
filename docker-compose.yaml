@@ -1,0 +1,19 @@
+services:
+  banzo-webui:
+    image: banzo/openwebui-custom:latest
+    container_name: banzo-webui-container
+    restart: always
+    ports:
+      - "3214:8080"
+    volumes:
+      - /path/to/your/ollama_data:/root/.ollama
+      - /path/to/your/openwebui_data:/app/backend/data
+    environment:
+      - CLOUDFLARED_TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
