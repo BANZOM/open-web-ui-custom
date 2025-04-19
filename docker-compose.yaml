@@ -1,5 +1,6 @@
 services:
   banzo-webui:
+    build: .
     image: banzo/openwebui-custom:latest
     container_name: banzo-webui-container
     restart: always
