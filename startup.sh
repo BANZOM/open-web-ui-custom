@@ -29,3 +29,10 @@ docker run -itd --gpus all \
   -v /path/to/your/openwebui_data:/app/backend/data \
   -e CLOUDFLARED_TUNNEL_TOKEN=${TUNNEL_TOKEN} \
   banzo/openwebui-custom
+
+
+# Compose setup
+docker-compose up -d --build
+docker-compose up -d
+docker compose build
+docker-compose down
